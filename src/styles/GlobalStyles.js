@@ -7,9 +7,14 @@ export const GlobalStyles = createGlobalStyle`
     font-size: 20px;
     font-weight: bold;
   }
+
+  :root{
+    --main-color:#3d51ff;
+  }
 `;
 
 export const Box = styled.div`
+  position: relative;
   height: 400px;
   margin: 10px;
   padding: 20px;

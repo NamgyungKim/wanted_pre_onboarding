@@ -83,7 +83,7 @@ const ToggleBtn = styled.div`
       width: 100px;
       height: 40px;
       transform: translateX(-100%);
-      background-color: #3d51ff;
+      background-color: var(--main-color);
       transition: all 0.4s;
       content: "";
     }
