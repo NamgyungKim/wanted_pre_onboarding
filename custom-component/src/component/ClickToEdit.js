@@ -4,12 +4,10 @@ import { Box } from "../styles/GlobalStyles";
 
 const ClickToEdit = () => {
   const [name, setName] = useState({
-    label: "이름",
     text: "김남경",
     chainge: false,
   });
   const [age, setAge] = useState({
-    label: "나이",
     text: 26,
     chainge: false,
   });
@@ -42,7 +40,7 @@ const ClickToEdit = () => {
         {/* 이름 */}
         {name.chainge ? (
           <div>
-            <label>{name.label}</label>
+            <label>이름</label>
             <input
               ref={inputName}
               name="name"
@@ -52,7 +50,7 @@ const ClickToEdit = () => {
           </div>
         ) : (
           <div>
-            <span>{name.label}</span>
+            <span>이름</span>
             <div onClick={() => setName({ ...name, chainge: true })}>
               {name.text}
             </div>
@@ -61,12 +59,12 @@ const ClickToEdit = () => {
         {/* 나이 */}
         {age.chainge ? (
           <div>
-            <label>{age.label}</label>
+            <label>나이</label>
             <input ref={inputAge} name="name" onBlur={ageOnBlur} type="text" />
           </div>
         ) : (
           <div>
-            <span>{age.label}</span>
+            <span>나이</span>
             <div onClick={() => setAge({ ...age, chainge: true })}>
               {age.text}
             </div>
@@ -74,7 +72,7 @@ const ClickToEdit = () => {
         )}
 
         <p>
-          {name.label} {name.text} {age.label} {age.text}
+          이름 {name.text} 나이 {age.text}
         </p>
       </FormBox>
     </Box>
