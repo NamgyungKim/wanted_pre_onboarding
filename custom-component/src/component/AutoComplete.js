@@ -4,6 +4,7 @@ import { Box } from "../styles/GlobalStyles";
 
 let focusPosition = 0;
 const AutoComplete = () => {
+  // 자동완성될 키워드
   const [keyword, setKeyword] = useState([
     "abc",
     "apple",
@@ -20,7 +21,6 @@ const AutoComplete = () => {
   // input 입력
   // 자동완성 추가
   const addKeyword = (e) => {
-    setShowAutoComplete(true);
     const copyKeyword = keyword.slice();
     // 엔터키에서만 실행
     if (e.key === "Enter") {
@@ -63,10 +63,9 @@ const AutoComplete = () => {
     setShowAutoComplete(true);
     e.preventDefault();
 
-    // 검색
+    // 키워드focus 상태에서 엔터 또는 click 시
     if (e.key === "Enter" || e.type === "click") {
       setInputValue(e.target.innerHTML);
-      e.target.blur();
     }
 
     // press up key
