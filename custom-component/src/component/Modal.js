@@ -11,16 +11,18 @@ const Modal = () => {
       <h1>Modal</h1>
       <ModalBox>
         {/* 모달버튼 */}
-        <ModalBtn type="button" onClick={() => setShowModal(!showModal)}>
+        <ModalBtn type="button" onClick={() => setShowModal(true)}>
           Open Modal
         </ModalBtn>
         {/* 모달창 */}
-        <ModalWindow showModal={showModal}>
-          <div>
-            <button onClick={() => setShowModal(!showModal)} />
-            <p>HELLOW CODESTATES</p>
-          </div>
-        </ModalWindow>
+        {showModal ? (
+          <ModalWindow>
+            <div>
+              <button onClick={() => setShowModal(false)} />
+              <p>HELLOW CODESTATES</p>
+            </div>
+          </ModalWindow>
+        ) : null}
       </ModalBox>
     </Box>
   );
@@ -51,7 +53,6 @@ const ModalWindow = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  visibility: ${(prop) => (prop.showModal ? "visible" : "hidden")};
   top: 0;
   left: 0;
   width: 100%;
