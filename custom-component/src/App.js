@@ -18,7 +18,6 @@ const tabMenu = [
 
 const App = () => {
   const [toggle, setToggle] = useState(false);
-  const [showModal, setShowModal] = useState(false);
   const [tags, setTags] = useState(["CodeState", "codding"]);
   const [autoComplete, setAutoComplete] = useState([
     // 원래 빈배열로 두어야하지만 test케이스로 담아두었습니다.
@@ -45,13 +44,7 @@ const App = () => {
       {/* Modal */}
       <ComponentWrap
         title="Modal"
-        contents={
-          <Modal
-            showModal={showModal}
-            setShowModal={setShowModal}
-            modalText={"HELLOW CODESTATES"}
-          />
-        }
+        contents={<Modal modalText={"HELLOW CODESTATES"} />}
       />
 
       {/* Tab */}

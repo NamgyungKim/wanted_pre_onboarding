@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 
-const Modal = ({ showModal, setShowModal, modalText }) => {
+const Modal = ({ modalText }) => {
+  const [showModal, setShowModal] = useState(false);
   return (
     <ModalBox>
       {/* 모달버튼 */}
