@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
-import { Box } from "../styles/GlobalStyles";
 
 let focusPosition = 0;
 const AutoComplete = () => {
@@ -104,69 +103,63 @@ const AutoComplete = () => {
   };
 
   return (
-    <Box>
-      <h1>AutoComplete</h1>
-      <AutoCompleteBox>
-        <InputContainer
-          tabIndex="0"
-          onBlur={(e) => {
-            if (
-              e.relatedTarget &&
-              e.relatedTarget.className === "autoComplete"
-            ) {
-              setShowAutoComplete(true);
-            } else {
+    <AutoCompleteBox>
+      <InputContainer
+        tabIndex="0"
+        onBlur={(e) => {
+          if (e.relatedTarget && e.relatedTarget.className === "autoComplete") {
+            setShowAutoComplete(true);
+          } else {
+            setShowAutoComplete(false);
+          }
+        }}
+        onFocus={() => setShowAutoComplete(true)}
+      >
+        <div>
+          <input
+            onKeyPress={addKeyword}
+            onKeyDown={focusKeyword}
+            onChange={onChainge}
+            ref={inputRef}
+            type="text"
+            value={inputValue}
+          />
+          <button
+            onClick={() => {
+              setInputValue("");
               setShowAutoComplete(false);
-            }
-          }}
-          onFocus={() => setShowAutoComplete(true)}
-        >
-          <div>
-            <input
-              onKeyPress={addKeyword}
-              onKeyDown={focusKeyword}
-              onChange={onChainge}
-              ref={inputRef}
-              type="text"
-              value={inputValue}
-            />
-            <button
-              onClick={() => {
-                setInputValue("");
-                setShowAutoComplete(false);
-              }}
-            />
-          </div>
-          {/* 자동완성 */}
-          {showAutoComplete && inputValue !== "" ? (
-            <ul ref={ulRef}>
-              {keyword
-                .filter((item) => {
-                  const regExp = new RegExp(`^${inputValue}`);
-                  return regExp.test(item);
-                })
-                .map((item, num) => {
-                  // 최대 10개만 보여주기
-                  if (num < 10) {
-                    return (
-                      <li
-                        onClick={focusAutoComplete}
-                        onKeyDown={focusAutoComplete}
-                        key={num}
-                        tabIndex="0"
-                        className="autoComplete"
-                      >
-                        {item}
-                      </li>
-                    );
-                  }
-                  return null;
-                })}
-            </ul>
-          ) : null}
-        </InputContainer>
-      </AutoCompleteBox>
-    </Box>
+            }}
+          />
+        </div>
+        {/* 자동완성 */}
+        {showAutoComplete && inputValue !== "" ? (
+          <ul ref={ulRef}>
+            {keyword
+              .filter((item) => {
+                const regExp = new RegExp(`^${inputValue}`);
+                return regExp.test(item);
+              })
+              .map((item, num) => {
+                // 최대 10개만 보여주기
+                if (num < 10) {
+                  return (
+                    <li
+                      onClick={focusAutoComplete}
+                      onKeyDown={focusAutoComplete}
+                      key={num}
+                      tabIndex="0"
+                      className="autoComplete"
+                    >
+                      {item}
+                    </li>
+                  );
+                }
+                return null;
+              })}
+          </ul>
+        ) : null}
+      </InputContainer>
+    </AutoCompleteBox>
   );
 };
 

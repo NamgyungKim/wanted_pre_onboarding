@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
-import { Box } from "../styles/GlobalStyles";
 
 const Tag = () => {
   const [tags, setTags] = useState(["CodeState", "codding"]);
@@ -24,27 +23,24 @@ const Tag = () => {
   };
 
   return (
-    <Box>
-      <h1>Tag</h1>
-      <TagBox>
-        {/* tags */}
-        {tags.map((item, num) => {
-          return (
-            <TagBtn key={num}>
-              <span>{item}</span>
-              <button onClick={() => removeTag(num)} />
-            </TagBtn>
-          );
-        })}
-        {/* input */}
-        <Input
-          ref={inputRef}
-          onKeyPress={addTag}
-          placeholder="Press enter to add tags"
-          type="text"
-        />
-      </TagBox>
-    </Box>
+    <TagBox>
+      {/* tags */}
+      {tags.map((item, num) => {
+        return (
+          <TagBtn key={num}>
+            <span>{item}</span>
+            <button onClick={() => removeTag(num)} />
+          </TagBtn>
+        );
+      })}
+      {/* input */}
+      <Input
+        ref={inputRef}
+        onKeyPress={addTag}
+        placeholder="Press enter to add tags"
+        type="text"
+      />
+    </TagBox>
   );
 };
 

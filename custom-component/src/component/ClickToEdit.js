@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { Box } from "../styles/GlobalStyles";
 
 const ClickToEdit = () => {
   const [name, setName] = useState({
@@ -34,48 +33,40 @@ const ClickToEdit = () => {
   }, [age]);
 
   return (
-    <Box>
-      <h1>ClickToEdit</h1>
-      <FormBox>
-        {/* 이름 */}
-        {name.chainge ? (
-          <div>
-            <label>이름</label>
-            <input
-              ref={inputName}
-              name="name"
-              onBlur={nameOnBlur}
-              type="text"
-            />
+    <FormBox>
+      {/* 이름 */}
+      {name.chainge ? (
+        <div>
+          <label>이름</label>
+          <input ref={inputName} name="name" onBlur={nameOnBlur} type="text" />
+        </div>
+      ) : (
+        <div>
+          <span>이름</span>
+          <div onClick={() => setName({ ...name, chainge: true })}>
+            {name.text}
           </div>
-        ) : (
-          <div>
-            <span>이름</span>
-            <div onClick={() => setName({ ...name, chainge: true })}>
-              {name.text}
-            </div>
+        </div>
+      )}
+      {/* 나이 */}
+      {age.chainge ? (
+        <div>
+          <label>나이</label>
+          <input ref={inputAge} name="name" onBlur={ageOnBlur} type="text" />
+        </div>
+      ) : (
+        <div>
+          <span>나이</span>
+          <div onClick={() => setAge({ ...age, chainge: true })}>
+            {age.text}
           </div>
-        )}
-        {/* 나이 */}
-        {age.chainge ? (
-          <div>
-            <label>나이</label>
-            <input ref={inputAge} name="name" onBlur={ageOnBlur} type="text" />
-          </div>
-        ) : (
-          <div>
-            <span>나이</span>
-            <div onClick={() => setAge({ ...age, chainge: true })}>
-              {age.text}
-            </div>
-          </div>
-        )}
+        </div>
+      )}
 
-        <p>
-          이름 {name.text} 나이 {age.text}
-        </p>
-      </FormBox>
-    </Box>
+      <p>
+        이름 {name.text} 나이 {age.text}
+      </p>
+    </FormBox>
   );
 };
 

@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
-import { Box } from "../styles/GlobalStyles";
 
 const Toggle = () => {
   // checkbox 체크여부
@@ -9,20 +8,17 @@ const Toggle = () => {
   const toggleCheck = useRef();
 
   return (
-    <Box>
-      <h1>Toggle</h1>
-      <ToggleBox>
-        {/* Toggle */}
-        <ToggleBtn onClick={() => setToggleBtn(toggleCheck.current.checked)}>
-          <input id="toggle" type="checkbox" ref={toggleCheck} />
-          <label htmlFor="toggle">
-            <span />
-          </label>
-        </ToggleBtn>
-        {/* 토글 on/off 표시 */}
-        <p>Toggle Switch {toggleBtn ? "ON" : "OFF"}</p>
-      </ToggleBox>
-    </Box>
+    <ToggleBox>
+      {/* Toggle */}
+      <ToggleBtn onClick={() => setToggleBtn(toggleCheck.current.checked)}>
+        <input id="toggle" type="checkbox" ref={toggleCheck} />
+        <label htmlFor="toggle">
+          <span />
+        </label>
+      </ToggleBtn>
+      {/* 토글 on/off 표시 */}
+      <p>Toggle Switch {toggleBtn ? "ON" : "OFF"}</p>
+    </ToggleBox>
   );
 };
 

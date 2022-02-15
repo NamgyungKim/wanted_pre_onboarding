@@ -1,30 +1,26 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Box } from "../styles/GlobalStyles";
 
 const Modal = () => {
   // 모달창 보여주기 여부
   const [showModal, setShowModal] = useState(false);
 
   return (
-    <Box>
-      <h1>Modal</h1>
-      <ModalBox>
-        {/* 모달버튼 */}
-        <ModalBtn type="button" onClick={() => setShowModal(true)}>
-          Open Modal
-        </ModalBtn>
-        {/* 모달창 */}
-        {showModal ? (
-          <ModalWindow>
-            <div>
-              <button onClick={() => setShowModal(false)} />
-              <p>HELLOW CODESTATES</p>
-            </div>
-          </ModalWindow>
-        ) : null}
-      </ModalBox>
-    </Box>
+    <ModalBox>
+      {/* 모달버튼 */}
+      <ModalBtn type="button" onClick={() => setShowModal(true)}>
+        Open Modal
+      </ModalBtn>
+      {/* 모달창 */}
+      {showModal ? (
+        <ModalWindow>
+          <div>
+            <button onClick={() => setShowModal(false)} />
+            <p>HELLOW CODESTATES</p>
+          </div>
+        </ModalWindow>
+      ) : null}
+    </ModalBox>
   );
 };
 

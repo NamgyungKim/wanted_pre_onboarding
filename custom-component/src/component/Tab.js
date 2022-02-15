@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Box } from "../styles/GlobalStyles";
 
 // Tab 컨텐츠
 const Tab1 = () => <div>Tab menu One</div>;
@@ -17,8 +16,7 @@ const tabMenu = [
 const Tab = () => {
   const [tabBtn, setTebBtn] = useState(0);
   return (
-    <Box>
-      <h1>Tab</h1>
+    <>
       {/* 탭매뉴 */}
       <TabBox>
         {tabMenu.map((item, num) => (
@@ -33,7 +31,7 @@ const Tab = () => {
       </TabBox>
       {/* 탭 컨텐츠 */}
       <Content>{tabMenu[tabBtn].con}</Content>
-    </Box>
+    </>
   );
 };
 
