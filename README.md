@@ -53,6 +53,17 @@ https://friendly-fermi-7483ff.netlify.app/
 
 ![1 Toggle](https://user-images.githubusercontent.com/87519250/152916390-5d993c70-bff2-4abe-a406-8a978c0000c3.gif)
 
+**✔ 사용 방법**
+
+```js
+const [toggle, setToggle] = useState(false);
+```
+
+| prop                     | Type | Description   |
+| ------------------------ | ---- | ------------- |
+| toggle ( isRequired )    | bool | 토글의 On/Off |
+| setToggle ( isRequired ) | func | 상태 변경     |
+
 **✔ 구현방법**
 
 - checkBox의 체크상태를 useState를 사용해 변경해주었다.
@@ -126,6 +137,12 @@ https://friendly-fermi-7483ff.netlify.app/
 
 ![2 Modal](https://user-images.githubusercontent.com/87519250/152916893-7645cf7b-6f5a-4b3d-875b-eccaca805ccc.gif)
 
+**✔ 사용 방법**
+
+| prop      | Type   | Description   |
+| --------- | ------ | ------------- |
+| modalText | string | 모달창 메시지 |
+
 **✔ 구현방법**
 
 - useState의 true/false값을 통해 모달창의 보여줌 여부를 결정하였다.
@@ -169,6 +186,20 @@ https://friendly-fermi-7483ff.netlify.app/
 - 탭버튼 클릭 시 해당 탭내용이 보여진다.
 
 ![3 Tab](https://user-images.githubusercontent.com/87519250/152916913-837efa2e-8414-4e4d-a81b-839f717d4fa8.gif)
+
+**✔ 사용 방법**
+
+```js
+const tabMenu = [
+  { name: "Tab1", con: <Tab1 /> },
+  { name: "Tab2", con: <Tab2 /> },
+  { name: "Tab3", con: <Tab3 /> },
+];
+```
+
+| prop                   | Type | Description                               |
+| ---------------------- | ---- | ----------------------------------------- |
+| tabMenu ( isRequired ) | arr  | [{name: 'string 탭명', con: '컴포넌트'},] |
 
 **✔ 구현방법**
 
@@ -225,6 +256,17 @@ https://friendly-fermi-7483ff.netlify.app/
 
 ![4 Tag](https://user-images.githubusercontent.com/87519250/152916917-b55af0fc-dcbc-44a4-bd21-1c59af44743e.gif)
 
+**✔ 사용 방법**
+
+```js
+const [tags, setTags] = useState(["CodeState", "codding"]);
+```
+
+| prop                   | Type | Description |
+| ---------------------- | ---- | ----------- |
+| tags ( isRequired )    | arr  | 태그 배열   |
+| setTags ( isRequired ) | func | 상태 변경   |
+
 **✔ 구현방법**
 
 - usState에 배열을 추가
@@ -271,34 +313,34 @@ https://friendly-fermi-7483ff.netlify.app/
 
 - 태그 제거
 
-  1. 태그의 x 클릭 시 removeTag 함수실행, 클릭한 테그의 index값을 num으로 가져온다.
-  2. 받아온num를 이용해 배열을 수정해준다.
+  1.  태그의 x 클릭 시 removeTag 함수실행, 클릭한 테그의 index값을 num으로 가져온다.
+  2.  받아온num를 이용해 배열을 수정해준다.
 
-     ```js
-     const [tags, setTags] = useState(["CodeState", "codding"]);
+  ```js
+  const [tags, setTags] = useState(["CodeState", "codding"]);
 
-     // 태그 제거
-     const removeTag = (num) => {
-       //tags내용을 item으로 복사 해서 사용
-       const item = tags.slice();
-       item.splice(num, 1);
-       setTags(item);
-     };
+  // 태그 제거
+  const removeTag = (num) => {
+    //tags내용을 item으로 복사 해서 사용
+    const item = tags.slice();
+    item.splice(num, 1);
+    setTags(item);
+  };
 
-     return (
-       <TagBox>
-         {/* tags */}
-         {tags.map((item, num) => {
-           return (
-             <TagBtn key={num}>
-               <span>{item}</span>
-               <button onClick={() => removeTag(num)} />
-             </TagBtn>
-           );
-         })}
-       </TagBox>
-     );
-     ```
+  return (
+    <TagBox>
+      {/* tags */}
+      {tags.map((item, num) => {
+        return (
+          <TagBtn key={num}>
+            <span>{item}</span>
+            <button onClick={() => removeTag(num)} />
+          </TagBtn>
+        );
+      })}
+    </TagBox>
+  );
+  ```
 
 **✔ 어려웠던 점**
 
@@ -333,6 +375,18 @@ https://friendly-fermi-7483ff.netlify.app/
 - focus가 다른곳에 가있을때는 자동완성창이 닫힌다.
 
 ![5 AutoComplete](https://user-images.githubusercontent.com/87519250/152916921-30d6468c-45f2-4fce-8341-0ee2c8ceb821.gif)
+
+**✔ 사용 방법**
+
+```js
+// 원래 빈배열로 두어야하지만 test케이스로 담아두었습니다.
+const [autoComplete, setAutoComplete] = useState(["abc", "apple", "ask"]);
+```
+
+| prop                           | Type | Description |
+| ------------------------------ | ---- | ----------- |
+| autoComplete ( isRequired )    | arr  | 자동완성    |
+| setAutoComplete ( isRequired ) | func | 상태 변경   |
 
 **✔ 구현방법**
 
@@ -469,6 +523,20 @@ https://friendly-fermi-7483ff.netlify.app/
 - 입력이 끝난 후 focus out을 하면 아래 결과가 변경된다.
 
 ![6 ClickToEdit](https://user-images.githubusercontent.com/87519250/152916922-e305edd4-a5c3-4dc4-b0a2-c04ad4c6304d.gif)
+
+**✔ 사용 방법**
+
+```js
+const [form, setForm] = useState([
+  { label: "이름", text: "김남경", chainge: false },
+  { label: "나이", text: 26, chainge: false },
+]);
+```
+
+| prop                   | Type | Description                                 |
+| ---------------------- | ---- | ------------------------------------------- |
+| form ( isRequired )    | arr  | { label:string, text: any, chainge: false } |
+| setForm ( isRequired ) | func | 상태 변경                                   |
 
 **✔ 구현방법**
 
