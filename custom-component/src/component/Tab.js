@@ -1,24 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
-// Tab 컨텐츠
-const Tab1 = () => <div>Tab menu One</div>;
-const Tab2 = () => <div>Tab menu Two</div>;
-const Tab3 = () => <div>Tab menu Three</div>;
-
-// Tab 매뉴명, 컨텐츠
-const tabMenu = [
-  { name: "Tab1", con: <Tab1 /> },
-  { name: "Tab2", con: <Tab2 /> },
-  { name: "Tab3", con: <Tab3 /> },
-];
-
-const Tab = () => {
+const Tab = ({ tabMenu }) => {
   const [tabBtn, setTebBtn] = useState(0);
   return (
     <>
       {/* 탭매뉴 */}
-      <TabBox>
+      <TabBox tabMenu={tabMenu}>
         {tabMenu.map((item, num) => (
           <div
             className={tabBtn === num ? "active" : ""}
@@ -45,7 +34,7 @@ const TabBox = styled.nav`
   transform: translateY(-15px);
   background-color: #ddd;
   div {
-    width: calc((100% / ${tabMenu.length}) - 20px);
+    width: calc((100% / ${(prop) => prop.tabMenu.length}) - 20px);
     padding-left: 20px;
     box-sizing: border-box;
     color: #aaa;
@@ -70,4 +59,11 @@ const Content = styled.div`
     line-height: 300px;
   }
 `;
+
+Tab.propTypes = {
+  tabMenu: PropTypes.arrayOf(
+    PropTypes.shape({ name: PropTypes.string, con: PropTypes.object })
+  ).isRequired,
+};
+
 export default Tab;

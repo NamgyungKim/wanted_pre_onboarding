@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
-const Modal = () => {
-  // 모달창 보여주기 여부
-  const [showModal, setShowModal] = useState(false);
-
+const Modal = ({ showModal, setShowModal, modalText }) => {
   return (
     <ModalBox>
       {/* 모달버튼 */}
@@ -16,7 +14,7 @@ const Modal = () => {
         <ModalWindow>
           <div>
             <button onClick={() => setShowModal(false)} />
-            <p>HELLOW CODESTATES</p>
+            <p>{modalText}</p>
           </div>
         </ModalWindow>
       ) : null}
@@ -100,5 +98,11 @@ const ModalWindow = styled.div`
     }
   }
 `;
+
+Modal.propTypes = {
+  showModal: PropTypes.bool.isRequired,
+  setShowModal: PropTypes.func.isRequired,
+  modalText: PropTypes.string,
+};
 
 export default Modal;

@@ -1,8 +1,8 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
-const Tag = () => {
-  const [tags, setTags] = useState(["CodeState", "codding"]);
+const Tag = ({ tags, setTags }) => {
   const inputRef = useRef();
 
   // 태그 제거
@@ -111,5 +111,10 @@ const Input = styled.input`
     outline: none;
   }
 `;
+
+Tag.propTypes = {
+  tags: PropTypes.array.isRequired,
+  setTags: PropTypes.func.isRequired,
+};
 
 export default Tag;

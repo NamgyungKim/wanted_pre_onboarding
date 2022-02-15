@@ -1,23 +1,22 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
-const Toggle = () => {
-  // checkbox 체크여부
-  const [toggleBtn, setToggleBtn] = useState(false);
+const Toggle = ({ toggle, setToggle }) => {
   //input checkbox
   const toggleCheck = useRef();
 
   return (
     <ToggleBox>
       {/* Toggle */}
-      <ToggleBtn onClick={() => setToggleBtn(toggleCheck.current.checked)}>
+      <ToggleBtn onClick={() => setToggle(toggleCheck.current.checked)}>
         <input id="toggle" type="checkbox" ref={toggleCheck} />
         <label htmlFor="toggle">
           <span />
         </label>
       </ToggleBtn>
       {/* 토글 on/off 표시 */}
-      <p>Toggle Switch {toggleBtn ? "ON" : "OFF"}</p>
+      <p>Toggle Switch {toggle ? "ON" : "OFF"}</p>
     </ToggleBox>
   );
 };
@@ -85,5 +84,10 @@ const ToggleBtn = styled.div`
     }
   }
 `;
+
+Toggle.propTypes = {
+  toggle: PropTypes.bool.isRequired,
+  setToggle: PropTypes.func.isRequired,
+};
 
 export default Toggle;

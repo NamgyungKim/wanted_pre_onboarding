@@ -1,17 +1,9 @@
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
 let focusPosition = 0;
-const AutoComplete = () => {
-  // 자동완성될 키워드
-  const [keyword, setKeyword] = useState([
-    "abc",
-    "apple",
-    "ask",
-    "admit",
-    "acess",
-    "test",
-  ]);
+const AutoComplete = ({ autoComplete, setAutoComplete }) => {
   const [inputValue, setInputValue] = useState("");
   const [showAutoComplete, setShowAutoComplete] = useState(false);
   const inputRef = useRef();
@@ -20,17 +12,17 @@ const AutoComplete = () => {
   // input 입력
   // 자동완성 추가
   const addKeyword = (e) => {
-    const copyKeyword = keyword.slice();
+    const copyKeyword = autoComplete.slice();
     // 엔터키에서만 실행
     if (e.key === "Enter") {
       // 엔터시 자동완성배열에 추가
-      if (keyword.indexOf(inputValue) === -1) {
+      if (autoComplete.indexOf(inputValue) === -1) {
         copyKeyword.unshift(inputValue);
-        setKeyword(copyKeyword);
+        setAutoComplete(copyKeyword);
       } else {
         // 최근입력값 배열 가장 앞으로
         copyKeyword.splice(copyKeyword.indexOf(inputValue), 1);
-        setKeyword(copyKeyword);
+        setAutoComplete(copyKeyword);
         copyKeyword.unshift(inputValue);
       }
       // input reset
@@ -134,7 +126,7 @@ const AutoComplete = () => {
         {/* 자동완성 */}
         {showAutoComplete && inputValue !== "" ? (
           <ul ref={ulRef}>
-            {keyword
+            {autoComplete
               .filter((item) => {
                 const regExp = new RegExp(`^${inputValue}`);
                 return regExp.test(item);
@@ -242,4 +234,10 @@ const InputContainer = styled.div`
     }
   }
 `;
+
+AutoComplete.propTypes = {
+  autoComplete: PropTypes.array.isRequired,
+  setAutoComplete: PropTypes.func.isRequired,
+};
+
 export default AutoComplete;
