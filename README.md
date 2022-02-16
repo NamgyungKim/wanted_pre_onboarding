@@ -540,71 +540,80 @@ const [form, setForm] = useState([
 
 **✔ 구현방법**
 
-- 입력 택스트(text)와 변경중 여부(chainge)를 useStage로 두었다.
+- prop으로 아래 useState를 가져왔다. <br />
+  이렇게 배열로 가져옴으로서 form에 이름, 나이 이외에 다른 값을 추가로 받아 와야하는 경우 여기만 수정해도 자동 반영된다.
+
+```js
+const [form, setForm] = useState([
+  { label: "이름", text: "김남경", chainge: false },
+  { label: "나이", text: 26, chainge: false },
+]);
+```
+
+- div 박스 클릭시 input box로 변경 <br />
+  : 클릭한 박스의 index를 가져와서 chainge를 false로 변경함으로 div가 input 으로 바뀌로도록 하였다.
+
+```js
+const clickForm = (index) => {
+  const newForm = form.map((item, i) => {
+    if (index === i) return { ...item, chainge: true };
+    return item;
+  });
+  setForm(newForm);
+};
+```
+
+```js
+{
+  form.map((item, index) =>
+    item.chainge ? (
+      <div key={index}>
+        <label>{item.label}</label>
+        <input name={item.label} ref={inputRef} onBlur={onBlur} type="text" />
+      </div>
+    ) : (
+      <div key={index}>
+        <span>{item.label}</span>
+        <div name={item.label} onClick={() => clickForm(index)}>
+          {item.text}
+        </div>
+      </div>
+    )
+  );
+}
+```
+
+- form 변경시 input에 바로 포커스 : <br />
+  위에서 item.chainge가 true로 변경되면 클릭한 inputbox가 자동 포커스되도록하였다. <br />
+  포커스 이후, item.text가 input 안으로 바로 들어가도록 했다.
 
   ```js
-  const [name, setName] = useState({
-    text: "김남경",
-    chainge: false,
-  });
+  useEffect(() => {
+    form.forEach((item) => {
+      if (item.chainge === true) {
+        inputRef.current.focus();
+        inputRef.current.value = item.text;
+      }
+    });
+  }, [form]);
   ```
 
-- 클릭 시 input box로 변경되고 focusOut시 div박스로 변경
+- 포커스 아웃 시 input에 입력값 set으로 상태 변경<br />
+  포커스 아웃과 동시에 item의 chainge가 false로 변경되며, input태그가 div로 변경된다.
+  그리고 input에서 입력한 마지막 값을 setForm에 넣어줌으로서 상태를 변경했다.
 
-  1. div박스를 클릭 시 useState로 chainge: false > true로 변경
-  2. name.chainge가 true일 경우, false일경우 보여지는 html변경
-
-     ```js
-     const inputName = useRef();
-     return (
-       <>
-         {name.chainge ? (
-           <div>
-             <label>이름</label>
-             <input
-               ref={inputName}
-               name="name"
-               onBlur={nameOnBlur}
-               type="text"
-             />
-           </div>
-         ) : (
-           <div>
-             <span>이름</span>
-             <div onClick={() => setName({ ...name, chainge: true })}>
-               {name.text}
-             </div>
-           </div>
-         )}
-       </>
-     );
-     ```
-
-- div > input 로 변경시 input에 바로 focus
-
-  1. div박스를 클릭 시 useState로 chainge: false > true로 변경경
-  2. useState의 name.chainge가 병경되며 useEffect안의 if 문 실행
-  3. if 문 name.chainge가 true일 경우, inputName.current가 있을 경우 실행
-  4. `inputName.current.focus();`로 input에 포커스.
-     ```js
-     useEffect(() => {
-       if (name.chainge && inputName.current) {
-         inputName.current.focus();
-         inputName.current.value = name.text;
-       }
-     }, [name]);
-     ```
-
-- inputbox에서 focusOut을 했을 때 값 변경
-  1. focusOut 했을경우 nameOnBlur함수 실행
-  2. inpu의 value를 e.target으로 가져와서 Sate변경
-     ```js
-     const nameOnBlur = (e) =>
-       setName({ ...name, text: e.target.value, chainge: false });
-     ```
+  ```js
+  const onBlur = (e) => {
+    const newForm = form.map((item) => {
+      if (item.label === e.target.name)
+        return { ...item, text: e.target.value, chainge: false };
+      return item;
+    });
+    setForm(newForm);
+  };
+  ```
 
 **✔ 어려웠던 점**
 
 - 입렧상자를 클릭 했을때 input으로 바뀌며 동시에 바로 input에 포커스 되도록 해야하는 부분에서 어려움을 겪었다. 처음에는 div에 onClick 함수 안에`inputName.current.focus()`를 넣어주었다. 하지만 그렇게 했을 경우 아직 inputbox가 랜더링 되기 전이라 오류가 떴다. <br />
   그래서 이부분을 useEffect를 이용해서 해결해주었다.<br />
-  useEffect로 name의 변경을 감지하고, 이후 input에대한 focus() 처리를 해주니 잘 동작했다.
