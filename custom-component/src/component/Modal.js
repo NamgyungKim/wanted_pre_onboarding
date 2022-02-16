@@ -101,8 +101,6 @@ const ModalWindow = styled.div`
 `;
 
 Modal.propTypes = {
-  showModal: PropTypes.bool.isRequired,
-  setShowModal: PropTypes.func.isRequired,
   modalText: PropTypes.string,
 };
 
