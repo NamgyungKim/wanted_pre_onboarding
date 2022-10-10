@@ -3,6 +3,13 @@
 ![ckazubyqigyqb515__1080_790](https://user-images.githubusercontent.com/87519250/152908179-4fde3d07-ecbf-4163-a2ec-95e7f2786a9f.jpg)
 과제: https://codestates.notion.site/5f83f7a007664f1abcf0cdbcbbbbd521
 
+## 🚀배포
+
+https://wanted-preonbording.netlify.app/
+
+<br />
+<br />
+
 ## 📄 목차
 
 - [🚩원티드 프리온보딩 코스 선발과제](#원티드-프리온보딩-코스-선발과제)
@@ -36,12 +43,7 @@ $ npm run start
 <br/>
 <br/>
 
-## 🚀배포
 
-https://friendly-fermi-7483ff.netlify.app/
-
-<br />
-<br />
 
 ## 👩‍💻구현
 
